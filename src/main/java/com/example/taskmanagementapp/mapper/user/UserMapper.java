@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.NullValueCheckStrategy;
 
 @Mapper(config = MapperConfig.class,
-nullValueCheckStrategy = NullValueCheckStrategy.ON_IMPLICIT_CONVERSION)
+        nullValueCheckStrategy = NullValueCheckStrategy.ON_IMPLICIT_CONVERSION)
 public interface UserMapper {
     @Mapping(target = "password", ignore = true)
     User toUser(UserRegistrationRequestDto requestDto);
