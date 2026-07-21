@@ -1,5 +1,6 @@
 package com.example.taskmanagementapp.dto.user;
 
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,4 +14,5 @@ public class UserResponseDto {
     private String email;
     private String firstName;
     private String lastName;
+    private Set<String> roles;
 }

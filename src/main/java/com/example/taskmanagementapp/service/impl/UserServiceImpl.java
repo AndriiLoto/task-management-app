@@ -45,4 +45,9 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return userMapper.toUserResponseDto(user);
     }
+
+    @Override
+    public UserResponseDto getCurrentUserInfo(User user) {
+        return userMapper.toUserResponseDto(user);
+    }
 }
