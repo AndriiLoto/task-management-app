@@ -1,6 +1,7 @@
 package com.example.taskmanagementapp.service.impl;
 
 import com.example.taskmanagementapp.dto.user.UpdateUserProfileRequestDto;
+import com.example.taskmanagementapp.dto.user.UpdateUserRoleRequestDto;
 import com.example.taskmanagementapp.dto.user.UserRegistrationRequestDto;
 import com.example.taskmanagementapp.dto.user.UserResponseDto;
 import com.example.taskmanagementapp.exception.EntityNotFoundException;
@@ -63,6 +64,21 @@ public class UserServiceImpl implements UserService {
         validateUniqueProfileFields(updatedUser, requestDto);
         userMapper.updateUser(requestDto, updatedUser);
         updatedUser = userRepository.save(updatedUser);
+        return userMapper.toUserResponseDto(updatedUser);
+    }
+
+    @Override
+    public UserResponseDto updateUserRoleById(Long id, UpdateUserRoleRequestDto requestDto) {
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("User not found with id " + id)
+        );
+        Role role = roleRepository.findByName(requestDto.getRole()).orElseThrow(
+                () -> new EntityNotFoundException("Role not found with name "
+                        + requestDto.getRole())
+        );
+        user.getRoles().clear();
+        user.getRoles().add(role);
+        User updatedUser = userRepository.save(user);
         return userMapper.toUserResponseDto(updatedUser);
     }
 

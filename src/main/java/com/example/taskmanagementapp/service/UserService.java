@@ -1,6 +1,7 @@
 package com.example.taskmanagementapp.service;
 
 import com.example.taskmanagementapp.dto.user.UpdateUserProfileRequestDto;
+import com.example.taskmanagementapp.dto.user.UpdateUserRoleRequestDto;
 import com.example.taskmanagementapp.dto.user.UserRegistrationRequestDto;
 import com.example.taskmanagementapp.dto.user.UserResponseDto;
 import com.example.taskmanagementapp.exception.RegistrationException;
@@ -14,4 +15,6 @@ public interface UserService {
 
     UserResponseDto updateUserInfo(User user, UpdateUserProfileRequestDto requestDto)
             throws UpdateUserProfileException;
+
+    UserResponseDto updateUserRoleById(Long id, UpdateUserRoleRequestDto requestDto);
 }
