@@ -8,6 +8,7 @@ import com.example.taskmanagementapp.model.User;
 import com.example.taskmanagementapp.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,7 +40,8 @@ public class UserController {
             description = "Updates information about the currently authenticated user"
     )
     public UserResponseDto updateUserInfo(@AuthenticationPrincipal User user,
-                                          @RequestBody UpdateUserProfileRequestDto requestDto)
+                                          @RequestBody
+                                          @Valid UpdateUserProfileRequestDto requestDto)
             throws UpdateUserProfileException {
         return userService.updateUserInfo(user, requestDto);
     }
