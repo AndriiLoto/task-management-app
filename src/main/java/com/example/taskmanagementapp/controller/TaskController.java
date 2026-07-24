@@ -44,6 +44,13 @@ public class TaskController {
     )
     public Page<TaskResponseDto> getAllTasks(@AuthenticationPrincipal User user,
                                              @RequestParam Long projectId, Pageable pageable) {
-        return taskService.getAllTasks(user, projectId, pageable);
+        return taskService.getAllTasksByProjectId(user, projectId, pageable);
+    }
+    @GetMapping("/me")
+    @Operation(summary = "Get all tasks by assignee id",
+            description = "Get all tasks by project id for authenticated user"
+    )
+    public Page<TaskResponseDto> getAllTasks(@AuthenticationPrincipal User user, Pageable pageable) {
+        return taskService.getAllTasksForCurrentUser(user, pageable);
     }
 }

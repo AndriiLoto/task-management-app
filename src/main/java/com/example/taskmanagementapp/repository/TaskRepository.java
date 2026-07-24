@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
     Page<Task> getTasksByProjectId(Long projectId, Pageable pageable);
+
+    Page<Task> getTasksByAssigneeId(Long assigneeId, Pageable pageable);
 }
