@@ -55,6 +55,7 @@ public class TaskController {
         return taskService.getAllTasksForCurrentUser(user, pageable);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     @Operation(summary = "Get task by id",
             description = "Get task by id for authenticated user"
