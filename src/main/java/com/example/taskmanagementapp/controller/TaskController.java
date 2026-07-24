@@ -10,11 +10,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.control.MappingControl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -56,11 +54,13 @@ public class TaskController {
                                              @RequestParam Long projectId, Pageable pageable) {
         return taskService.getAllTasksByProjectId(user, projectId, pageable);
     }
+
     @GetMapping("/me")
     @Operation(summary = "Get all tasks by assignee id",
             description = "Get all tasks by project id for authenticated user"
     )
-    public Page<TaskResponseDto> getAllTasksForCurrentUser(@AuthenticationPrincipal User user, Pageable pageable) {
+    public Page<TaskResponseDto> getAllTasksForCurrentUser(@AuthenticationPrincipal User user,
+                                                           Pageable pageable) {
         return taskService.getAllTasksForCurrentUser(user, pageable);
     }
 

@@ -46,7 +46,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Page<TaskResponseDto> getAllTasksByProjectId(User user, Long projectId, Pageable pageable) {
+    public Page<TaskResponseDto> getAllTasksByProjectId(User user,
+                                                        Long projectId,
+                                                        Pageable pageable) {
         Project project = getProject(user, projectId);
         return taskRepository.getTasksByProjectId(project.getId(), pageable)
                 .map(taskMapper::toTaskResponseDto);
@@ -78,7 +80,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskResponseDto updateTaskStatus(Long taskId, User user, UpdateTaskStatusDto requestDto) {
+    public TaskResponseDto updateTaskStatus(Long taskId,
+                                            User user,
+                                            UpdateTaskStatusDto requestDto) {
         Task task = taskRepository.findById(taskId).orElseThrow(
                 () -> new EntityNotFoundException("Task not found with id " + taskId)
         );
@@ -100,7 +104,7 @@ public class TaskServiceImpl implements TaskService {
     private Project getProject(User user, Long projectId) {
         return projectRepository.findByIdAndOwnerId(projectId,
                 user.getId()).orElseThrow(
-                () -> new EntityNotFoundException("Project not found with id "
+                    () -> new EntityNotFoundException("Project not found with id "
                         + projectId)
         );
     }
