@@ -12,4 +12,6 @@ public interface TaskService {
     Page<TaskResponseDto> getAllTasksByProjectId(User user, Long projectId, Pageable pageable);
 
     Page<TaskResponseDto> getAllTasksForCurrentUser(User user, Pageable pageable);
+
+    TaskResponseDto getTaskById(Long id, User user);
 }

@@ -56,6 +56,15 @@ public class TaskServiceImpl implements TaskService {
                 .map(taskMapper::toTaskResponseDto);
     }
 
+    @Override
+    public TaskResponseDto getTaskById(Long id, User user) {
+        return taskRepository.findById(id)
+                .map(taskMapper::toTaskResponseDto)
+                .orElseThrow(
+                        () -> new EntityNotFoundException("Task not found with id " + id)
+                );
+    }
+
     private Project getProject(User user, Long projectId) {
         return projectRepository.findByIdAndOwnerId(projectId,
                 user.getId()).orElseThrow(

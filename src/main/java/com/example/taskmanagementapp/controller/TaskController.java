@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +51,15 @@ public class TaskController {
     @Operation(summary = "Get all tasks by assignee id",
             description = "Get all tasks by project id for authenticated user"
     )
-    public Page<TaskResponseDto> getAllTasks(@AuthenticationPrincipal User user, Pageable pageable) {
+    public Page<TaskResponseDto> getAllTasksForCurrentUser(@AuthenticationPrincipal User user, Pageable pageable) {
         return taskService.getAllTasksForCurrentUser(user, pageable);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Get task by id",
+            description = "Get task by id for authenticated user"
+    )
+    public TaskResponseDto getTaskById(@AuthenticationPrincipal User user, @PathVariable Long id) {
+        return taskService.getTaskById(id, user);
     }
 }
