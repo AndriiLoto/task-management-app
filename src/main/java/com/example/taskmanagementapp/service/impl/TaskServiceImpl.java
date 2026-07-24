@@ -62,11 +62,19 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponseDto getTaskById(Long id, User user) {
-        return taskRepository.findById(id)
-                .map(taskMapper::toTaskResponseDto)
-                .orElseThrow(
+        Task task = taskRepository.findById(id).orElseThrow(
                         () -> new EntityNotFoundException("Task not found with id " + id)
                 );
+        boolean isAdmin = user.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ADMIN"));
+
+        boolean isAssignee = task.getAssignee() != null
+                && task.getAssignee().getId().equals(user.getId());
+
+        if (!isAdmin && !isAssignee) {
+            throw new CustomAccessException("User don't have permission to access this task");
+        }
+        return taskMapper.toTaskResponseDto(task);
     }
 
     @Override
