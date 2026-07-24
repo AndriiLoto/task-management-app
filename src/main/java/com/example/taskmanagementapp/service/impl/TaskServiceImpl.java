@@ -13,6 +13,9 @@ import com.example.taskmanagementapp.repository.TaskRepository;
 import com.example.taskmanagementapp.repository.UserRepository;
 import com.example.taskmanagementapp.service.TaskService;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NonNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,11 +28,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponseDto createTask(User user, CreateTaskRequestDto requestDto) {
-        Project project = projectRepository.findByIdAndOwnerId(requestDto.getProjectId(),
-                user.getId()).orElseThrow(
-                    () -> new EntityNotFoundException("Project not found with id "
-                        + requestDto.getProjectId())
-        );
+        Project project = getProject(user, requestDto.getProjectId());
         Task task = taskMapper.toTask(requestDto);
         task.setProject(project);
         if (requestDto.getAssigneeId() != null) {
@@ -42,5 +41,20 @@ public class TaskServiceImpl implements TaskService {
         task.setStatus(TaskStatus.NOT_STARTED);
         taskRepository.save(task);
         return taskMapper.toTaskResponseDto(task);
+    }
+
+    @Override
+    public Page<TaskResponseDto> getAllTasks(User user, Long projectId, Pageable pageable) {
+        Project project = getProject(user, projectId);
+        return taskRepository.getTasksByProjectId(project.getId(), pageable)
+                .map(taskMapper::toTaskResponseDto);
+    }
+
+    private Project getProject(User user, Long projectId) {
+        return projectRepository.findByIdAndOwnerId(projectId,
+                user.getId()).orElseThrow(
+                () -> new EntityNotFoundException("Project not found with id "
+                        + projectId)
+        );
     }
 }
