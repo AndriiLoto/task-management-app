@@ -89,6 +89,14 @@ public class TaskServiceImpl implements TaskService {
         return taskMapper.toTaskResponseDto(task);
     }
 
+    @Override
+    public void deleteTaskById(Long taskId, User user) {
+        taskRepository.findById(taskId).orElseThrow(
+                () -> new EntityNotFoundException("Task not found with id " + taskId)
+        );
+        taskRepository.deleteById(taskId);
+    }
+
     private Project getProject(User user, Long projectId) {
         return projectRepository.findByIdAndOwnerId(projectId,
                 user.getId()).orElseThrow(
