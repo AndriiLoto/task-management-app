@@ -2,6 +2,9 @@ package com.example.taskmanagementapp.service.impl;
 
 import com.example.taskmanagementapp.dto.task.CreateTaskRequestDto;
 import com.example.taskmanagementapp.dto.task.TaskResponseDto;
+import com.example.taskmanagementapp.dto.task.UpdateTaskRequestDto;
+import com.example.taskmanagementapp.dto.task.UpdateTaskStatusDto;
+import com.example.taskmanagementapp.exception.CustomAccessException;
 import com.example.taskmanagementapp.exception.EntityNotFoundException;
 import com.example.taskmanagementapp.mapper.task.TaskMapper;
 import com.example.taskmanagementapp.model.Project;
@@ -13,7 +16,6 @@ import com.example.taskmanagementapp.repository.TaskRepository;
 import com.example.taskmanagementapp.repository.UserRepository;
 import com.example.taskmanagementapp.service.TaskService;
 import lombok.RequiredArgsConstructor;
-import org.jspecify.annotations.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -63,6 +65,28 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(
                         () -> new EntityNotFoundException("Task not found with id " + id)
                 );
+    }
+
+    @Override
+    public TaskResponseDto updateTaskById(Long taskId, User user, UpdateTaskRequestDto requestDto) {
+        Task task = taskRepository.findById(taskId).orElseThrow(
+                () -> new EntityNotFoundException("Task not found with id " + taskId)
+        );
+        taskMapper.updateTaskFromDto(requestDto,task);
+        Task updatedTask = taskRepository.save(task);
+        return taskMapper.toTaskResponseDto(updatedTask);
+    }
+
+    @Override
+    public TaskResponseDto updateTaskStatus(Long taskId, User user, UpdateTaskStatusDto requestDto) {
+        Task task = taskRepository.findById(taskId).orElseThrow(
+                () -> new EntityNotFoundException("Task not found with id " + taskId)
+        );
+        if (!task.getAssignee().getId().equals(user.getId())) {
+            throw new CustomAccessException("User is not assignee of this task");
+        }
+        task.setStatus(requestDto.getStatus());
+        return taskMapper.toTaskResponseDto(task);
     }
 
     private Project getProject(User user, Long projectId) {
