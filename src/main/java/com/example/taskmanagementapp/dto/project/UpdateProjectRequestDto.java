@@ -2,10 +2,10 @@ package com.example.taskmanagementapp.dto.project;
 
 import com.example.taskmanagementapp.model.ProjectStatus;
 import com.example.taskmanagementapp.validation.date.EndDate;
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import java.time.LocalDate;
 
 @Getter
 @Setter

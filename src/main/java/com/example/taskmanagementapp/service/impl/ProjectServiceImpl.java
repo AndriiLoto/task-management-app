@@ -11,7 +11,6 @@ import com.example.taskmanagementapp.model.User;
 import com.example.taskmanagementapp.repository.ProjectRepository;
 import com.example.taskmanagementapp.service.ProjectService;
 import lombok.RequiredArgsConstructor;
-import org.jspecify.annotations.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -44,7 +43,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectResponseDto updateProjectById(Long id, User user, UpdateProjectRequestDto requestDto) {
+    public ProjectResponseDto updateProjectById(Long id, User user,
+                                                UpdateProjectRequestDto requestDto) {
         Project project = getProjectByIdAndUserId(id, user);
         projectMapper.updateProjectFromDto(requestDto, project);
         Project updatedProject = projectRepository.save(project);

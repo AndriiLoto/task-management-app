@@ -40,7 +40,8 @@ public class UserController {
             description = "Updates information about the currently authenticated user"
     )
     public UserResponseDto updateUserInfo(@AuthenticationPrincipal User user,
-                                          @RequestBody @Valid UpdateUserProfileRequestDto requestDto)
+                                          @RequestBody
+                                          @Valid UpdateUserProfileRequestDto requestDto)
             throws UpdateUserProfileException {
         return userService.updateUserInfo(user, requestDto);
     }

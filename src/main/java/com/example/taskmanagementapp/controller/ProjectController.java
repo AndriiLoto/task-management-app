@@ -38,7 +38,8 @@ public class ProjectController {
     )
     @ResponseStatus(HttpStatus.CREATED)
     public ProjectResponseDto createProject(@AuthenticationPrincipal User user,
-                                            @RequestBody @Valid CreateProjectRequestDto requestDto) {
+                                            @RequestBody @Valid CreateProjectRequestDto requestDto
+    ) {
         return projectService.createProject(user, requestDto);
     }
 
@@ -47,7 +48,8 @@ public class ProjectController {
     @Operation(summary = "Get all projects",
             description = "Get all projects for the authenticated user"
     )
-    public Page<ProjectResponseDto> getAllProjects(@AuthenticationPrincipal User user, Pageable pageable) {
+    public Page<ProjectResponseDto> getAllProjects(@AuthenticationPrincipal User user,
+                                                   Pageable pageable) {
         return projectService.getAllProjects(user, pageable);
     }
 
@@ -56,7 +58,8 @@ public class ProjectController {
     @Operation(summary = "Get project by Id",
             description = "Get project by Id for current user"
     )
-    public ProjectResponseDto getProjectById(@AuthenticationPrincipal User user,@PathVariable Long id) {
+    public ProjectResponseDto getProjectById(@AuthenticationPrincipal User user,
+                                             @PathVariable Long id) {
         return projectService.getProjectById(id,user);
     }
 
@@ -66,8 +69,11 @@ public class ProjectController {
             description = "Update project by id for current user"
     )
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ProjectResponseDto updateProjectById(@AuthenticationPrincipal User user, @PathVariable Long id,
-                                                @RequestBody @Valid UpdateProjectRequestDto requestDto) {
+    public ProjectResponseDto updateProjectById(@AuthenticationPrincipal User user,
+                                                @PathVariable Long id,
+                                                @RequestBody
+                                                    @Valid UpdateProjectRequestDto requestDto
+    ) {
         return projectService.updateProjectById(id, user, requestDto);
     }
 
