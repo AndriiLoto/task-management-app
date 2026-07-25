@@ -96,4 +96,25 @@ public class TaskController {
                        @AuthenticationPrincipal User user) {
         taskService.deleteTaskById(taskId, user);
     }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("/{taskId}/labels/{labelId}")
+    @Operation(summary = "Add label to task", description = "Add label to task by id")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public TaskResponseDto addLabelToTask(@AuthenticationPrincipal User user,
+                                          @PathVariable Long taskId,
+                                          @PathVariable Long labelId
+    ) {
+        return taskService.addLabelToTask(taskId, user, labelId);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @DeleteMapping("/{taskId}/labels/{labelId}")
+    @Operation(summary = "Delete label from task", description = "Delete label from task by id")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public TaskResponseDto deleteLabelFromTask(@AuthenticationPrincipal User user,
+                                          @PathVariable Long taskId,
+                                          @PathVariable Long labelId) {
+        return taskService.removeLabelFromTask(taskId, user, labelId);
+    }
 }

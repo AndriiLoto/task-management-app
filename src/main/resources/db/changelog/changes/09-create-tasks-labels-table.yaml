@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tasks-labels-table
+      author: andrew
+      changes:
+        - createTable:
+            tableName: tasks_labels
+            columns:
+              - column:
+                  name: task_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_tasks_labels
+                    foreignKeyName: fk_tasks_labels_task
+                    references: tasks(id)
+              - column:
+                  name: label_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_tasks_labels
+                    foreignKeyName: fk_tasks_labels_label
+                    references: labels(id)

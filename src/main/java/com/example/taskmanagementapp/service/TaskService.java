@@ -22,4 +22,8 @@ public interface TaskService {
     TaskResponseDto updateTaskStatus(Long taskId, User user, UpdateTaskStatusDto requestDto);
 
     void deleteTaskById(Long taskId, User user);
+
+    TaskResponseDto addLabelToTask(Long taskId, User user, Long labelId);
+
+    TaskResponseDto removeLabelFromTask(Long taskId, User user, Long labelId);
 }

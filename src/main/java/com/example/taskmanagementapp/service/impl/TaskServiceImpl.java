@@ -6,15 +6,19 @@ import com.example.taskmanagementapp.dto.task.UpdateTaskRequestDto;
 import com.example.taskmanagementapp.dto.task.UpdateTaskStatusDto;
 import com.example.taskmanagementapp.exception.CustomAccessException;
 import com.example.taskmanagementapp.exception.EntityNotFoundException;
+import com.example.taskmanagementapp.exception.LabelNotAssignedException;
 import com.example.taskmanagementapp.mapper.task.TaskMapper;
+import com.example.taskmanagementapp.model.Label;
 import com.example.taskmanagementapp.model.Project;
 import com.example.taskmanagementapp.model.Task;
 import com.example.taskmanagementapp.model.TaskStatus;
 import com.example.taskmanagementapp.model.User;
+import com.example.taskmanagementapp.repository.LabelRepository;
 import com.example.taskmanagementapp.repository.ProjectRepository;
 import com.example.taskmanagementapp.repository.TaskRepository;
 import com.example.taskmanagementapp.repository.UserRepository;
 import com.example.taskmanagementapp.service.TaskService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +32,7 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
     private final TaskAccessService taskAccessService;
+    private final LabelRepository labelRepository;
 
     @Override
     public TaskResponseDto createTask(User user, CreateTaskRequestDto requestDto) {
@@ -63,18 +68,14 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponseDto getTaskById(Long id, User user) {
-        Task task = taskRepository.findById(id).orElseThrow(
-                        () -> new EntityNotFoundException("Task not found with id " + id)
-                );
+        Task task = getTaskObjectById(id);
         taskAccessService.checkAccess(user, task);
         return taskMapper.toTaskResponseDto(task);
     }
 
     @Override
     public TaskResponseDto updateTaskById(Long taskId, User user, UpdateTaskRequestDto requestDto) {
-        Task task = taskRepository.findById(taskId).orElseThrow(
-                () -> new EntityNotFoundException("Task not found with id " + taskId)
-        );
+        Task task = getTaskObjectById(taskId);
         taskMapper.updateTaskFromDto(requestDto,task);
         Task updatedTask = taskRepository.save(task);
         return taskMapper.toTaskResponseDto(updatedTask);
@@ -84,9 +85,7 @@ public class TaskServiceImpl implements TaskService {
     public TaskResponseDto updateTaskStatus(Long taskId,
                                             User user,
                                             UpdateTaskStatusDto requestDto) {
-        Task task = taskRepository.findById(taskId).orElseThrow(
-                () -> new EntityNotFoundException("Task not found with id " + taskId)
-        );
+        Task task = getTaskObjectById(taskId);
         if (!task.getAssignee().getId().equals(user.getId())) {
             throw new CustomAccessException("User is not assignee of this task");
         }
@@ -100,6 +99,41 @@ public class TaskServiceImpl implements TaskService {
                 () -> new EntityNotFoundException("Task not found with id " + taskId)
         );
         taskRepository.deleteById(taskId);
+    }
+
+    @Override
+    @Transactional
+    public TaskResponseDto addLabelToTask(Long taskId, User user, Long labelId) {
+        Task task = getTaskObjectById(taskId);
+        Label label = labelRepository.findById(labelId).orElseThrow(
+                () -> new EntityNotFoundException("Label not found with id " + labelId)
+        );
+        task.getLabels().add(label);
+        taskRepository.save(task);
+        return taskMapper.toTaskResponseDto(task);
+    }
+
+    @Override
+    @Transactional
+    public TaskResponseDto removeLabelFromTask(Long taskId, User user, Long labelId) {
+        Task task = getTaskObjectById(taskId);
+        Label label = labelRepository.findById(labelId).orElseThrow(
+                () -> new EntityNotFoundException("Label not found with id " + labelId)
+        );
+        if (!task.getLabels().contains(label)) {
+            throw new LabelNotAssignedException("Label with id " + labelId
+                    + " is not assigned to task with id "
+                    + taskId);
+        }
+        task.getLabels().remove(label);
+        taskRepository.save(task);
+        return taskMapper.toTaskResponseDto(task);
+    }
+
+    private Task getTaskObjectById(Long taskId) {
+        return taskRepository.findById(taskId).orElseThrow(
+                () -> new EntityNotFoundException("Task not found with id " + taskId)
+        );
     }
 
     private Project getProject(User user, Long projectId) {
