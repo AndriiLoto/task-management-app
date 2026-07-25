@@ -12,6 +12,8 @@ import com.example.taskmanagementapp.repository.CommentRepository;
 import com.example.taskmanagementapp.repository.TaskRepository;
 import com.example.taskmanagementapp.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -37,4 +39,16 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.save(comment);
         return commentMapper.toCommentResponseDto(comment);
     }
+
+    @Override
+    public Page<CommentResponseDto> getCommentsByTaskId(User user, Long taskId, Pageable pageable) {
+        Task task = taskRepository.findById(taskId).orElseThrow(
+                () -> new EntityNotFoundException("Task not found with id " + taskId)
+        );
+        taskAccessService.checkAccess(user, task);
+        return commentRepository.findCommentByTask_Id(taskId, pageable)
+                .map(commentMapper::toCommentResponseDto);
+    }
+
+
 }
