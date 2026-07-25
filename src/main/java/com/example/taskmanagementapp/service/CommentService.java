@@ -11,4 +11,6 @@ public interface CommentService {
     CommentResponseDto createComment(User user, CreateCommentRequestDto requestDto);
 
     Page<CommentResponseDto> getCommentsByTaskId(User user, Long taskId, Pageable pageable);
+
+    void deleteCommentById(Long id, User user);
 }

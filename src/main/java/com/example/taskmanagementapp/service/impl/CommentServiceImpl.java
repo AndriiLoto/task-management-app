@@ -50,5 +50,23 @@ public class CommentServiceImpl implements CommentService {
                 .map(commentMapper::toCommentResponseDto);
     }
 
+    @Override
+    public void deleteCommentById(Long id, User user) {
+        Comment comment = commentRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Comment not found with id " + id)
+        );
+
+        boolean isAdmin = user.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ADMIN"));
+
+        boolean isAssignee = comment.getUser() != null
+                && comment.getUser().getId().equals(user.getId());
+
+        if (!isAdmin && !isAssignee) {
+            throw new CustomAccessException("User don't have permission to delete this comment");
+        }
+        commentRepository.deleteById(id);
+    }
+
 
 }
