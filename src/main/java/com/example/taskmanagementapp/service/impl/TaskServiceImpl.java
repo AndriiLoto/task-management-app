@@ -27,6 +27,7 @@ public class TaskServiceImpl implements TaskService {
     private final ProjectRepository projectRepository;
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
+    private final TaskAccessService taskAccessService;
 
     @Override
     public TaskResponseDto createTask(User user, CreateTaskRequestDto requestDto) {
@@ -65,15 +66,7 @@ public class TaskServiceImpl implements TaskService {
         Task task = taskRepository.findById(id).orElseThrow(
                         () -> new EntityNotFoundException("Task not found with id " + id)
                 );
-        boolean isAdmin = user.getAuthorities().stream()
-                .anyMatch(authority -> authority.getAuthority().equals("ADMIN"));
-
-        boolean isAssignee = task.getAssignee() != null
-                && task.getAssignee().getId().equals(user.getId());
-
-        if (!isAdmin && !isAssignee) {
-            throw new CustomAccessException("User don't have permission to access this task");
-        }
+        taskAccessService.checkAccess(user, task);
         return taskMapper.toTaskResponseDto(task);
     }
 
