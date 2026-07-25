@@ -11,12 +11,11 @@ import com.example.taskmanagementapp.model.User;
 import com.example.taskmanagementapp.repository.CommentRepository;
 import com.example.taskmanagementapp.repository.TaskRepository;
 import com.example.taskmanagementapp.service.CommentService;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Service
@@ -30,7 +29,8 @@ public class CommentServiceImpl implements CommentService {
     public CommentResponseDto createComment(User user, CreateCommentRequestDto requestDto) {
         Comment comment = commentMapper.toComment(requestDto);
         Task task = taskRepository.findById(requestDto.getTaskId()).orElseThrow(
-                () -> new EntityNotFoundException("Task not found with id " + requestDto.getTaskId())
+                () -> new EntityNotFoundException("Task not found with id "
+                        + requestDto.getTaskId())
         );
         taskAccessService.checkAccess(user, task);
         comment.setTask(task);
@@ -67,6 +67,5 @@ public class CommentServiceImpl implements CommentService {
         }
         commentRepository.deleteById(id);
     }
-
 
 }

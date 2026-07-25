@@ -1,6 +1,5 @@
 package com.example.taskmanagementapp.repository;
 
-import com.example.taskmanagementapp.dto.comment.CommentResponseDto;
 import com.example.taskmanagementapp.model.Comment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
