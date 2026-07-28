@@ -96,4 +96,28 @@ public class NotificationServiceImpl implements NotificationService {
                 message
         );
     }
+
+    @Override
+    public void notifyTaskDeadline(Task task) {
+        User assignee = task.getAssignee();
+
+        if (assignee == null || assignee.getTelegramChatId() == null) {
+            return;
+        }
+
+        String message = """
+                Task deadline reminder! ⏰
+                
+                Task: %s
+                Priority: %s
+                Due date: %s
+                Status: %s
+                """.formatted(
+                            task.getName(),
+                            task.getPriority(),
+                            task.getDueDate(),
+                            task.getStatus()
+        );
+        telegramService.sendMessage(assignee.getTelegramChatId(), message);
+    }
 }

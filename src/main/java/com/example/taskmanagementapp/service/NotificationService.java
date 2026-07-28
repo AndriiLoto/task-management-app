@@ -12,4 +12,6 @@ public interface NotificationService {
     void notifyTaskReassigned(Task task);
 
     void notifyTaskStatusUpdate(Task task, TaskStatus oldStatus);
+
+    void notifyTaskDeadline(Task task);
 }
