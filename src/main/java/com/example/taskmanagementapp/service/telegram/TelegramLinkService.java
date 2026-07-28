@@ -1,4 +1,4 @@
-package com.example.taskmanagementapp.service;
+package com.example.taskmanagementapp.service.telegram;
 
 import com.example.taskmanagementapp.model.User;
 

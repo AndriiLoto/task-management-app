@@ -1,4 +1,4 @@
-package com.example.taskmanagementapp.service.impl;
+package com.example.taskmanagementapp.service.telegram.impl;
 
 import com.example.taskmanagementapp.exception.EntityNotFoundException;
 import com.example.taskmanagementapp.exception.TelegramLinkTokenExpiredException;
@@ -6,7 +6,7 @@ import com.example.taskmanagementapp.model.TelegramLinkToken;
 import com.example.taskmanagementapp.model.User;
 import com.example.taskmanagementapp.repository.TelegramLinkTokenRepository;
 import com.example.taskmanagementapp.repository.UserRepository;
-import com.example.taskmanagementapp.service.TelegramLinkService;
+import com.example.taskmanagementapp.service.telegram.TelegramLinkService;
 import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
