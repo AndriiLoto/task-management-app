@@ -12,8 +12,12 @@ import com.example.taskmanagementapp.repository.TaskRepository;
 import com.example.taskmanagementapp.service.AttachmentService;
 import com.example.taskmanagementapp.service.DropboxService;
 import java.time.LocalDateTime;
+
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,11 +31,10 @@ public class AttachmentServiceImpl implements AttachmentService {
     private final AttachmentMapper attachmentMapper;
 
     @Override
+    @Transactional
     public AttachmentResponseDto uploadAttachment(User user, Long taskId, MultipartFile file)
             throws FileUploadException {
-        Task task = taskRepository.findById(taskId).orElseThrow(
-                () -> new EntityNotFoundException("Task not found with id " + taskId)
-        );
+        Task task = getTaskById(taskId);
         taskAccessService.checkAccess(user,task);
         FileMetadata fileMetadata = dropboxService.uploadFile(file);
         Attachment attachment = new Attachment();
@@ -41,5 +44,19 @@ public class AttachmentServiceImpl implements AttachmentService {
         attachment.setTask(task);
         attachmentRepository.save(attachment);
         return attachmentMapper.toAttachmentResponseDto(attachment);
+    }
+
+    @Override
+    public Page<AttachmentResponseDto> findAttachmentsByTaskId(User user, Long taskId, Pageable pageable) {
+        Task task = getTaskById(taskId);
+        taskAccessService.checkAccess(user, task);
+        return attachmentRepository.findAllByTaskId(taskId, pageable)
+                .map(attachmentMapper::toAttachmentResponseDto);
+    }
+
+    private Task getTaskById(Long taskId) {
+        return taskRepository.findById(taskId).orElseThrow(
+                () -> new EntityNotFoundException("Task not found with id " + taskId)
+        );
     }
 }
