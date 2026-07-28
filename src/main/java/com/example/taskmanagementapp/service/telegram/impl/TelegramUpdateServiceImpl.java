@@ -16,6 +16,7 @@ public class TelegramUpdateServiceImpl implements TelegramUpdateService {
     private final TelegramLinkService telegramLinkService;
 
     private long offset = 0;
+
     @Override
     @Scheduled(fixedDelay = 3000)
     public void getChatId() {
@@ -37,7 +38,8 @@ public class TelegramUpdateServiceImpl implements TelegramUpdateService {
             String token = text.substring("/start".length()).trim();
             Long chatId = update.message().chat().id();
             telegramLinkService.linkTelegram(token, chatId);
-            telegramService.sendMessage(chatId, "You have successfully linked your Telegram account! ✅");
+            telegramService.sendMessage(chatId,
+                    "You have successfully linked your Telegram account! ✅");
         }
 
     }

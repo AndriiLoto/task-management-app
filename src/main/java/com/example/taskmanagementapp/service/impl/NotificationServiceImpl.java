@@ -85,7 +85,7 @@ public class NotificationServiceImpl implements NotificationService {
 
             Task: %s
             Status: %s → %s
-            """.formatted(
+                """.formatted(
                 task.getName(),
                 oldStatus,
                 task.getStatus()
