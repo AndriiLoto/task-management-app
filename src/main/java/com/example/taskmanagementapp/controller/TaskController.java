@@ -2,6 +2,7 @@ package com.example.taskmanagementapp.controller;
 
 import com.example.taskmanagementapp.dto.task.CreateTaskRequestDto;
 import com.example.taskmanagementapp.dto.task.TaskResponseDto;
+import com.example.taskmanagementapp.dto.task.TaskSearchParamDto;
 import com.example.taskmanagementapp.dto.task.UpdateTaskRequestDto;
 import com.example.taskmanagementapp.dto.task.UpdateTaskStatusDto;
 import com.example.taskmanagementapp.model.User;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -117,5 +119,13 @@ public class TaskController {
                                           @PathVariable Long taskId,
                                           @PathVariable Long labelId) {
         return taskService.removeLabelFromTask(taskId, user, labelId);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/search")
+    @Operation(summary = "Search tasks", description = "Search tasks using specified parameters")
+    public Page<TaskResponseDto> search(@ParameterObject TaskSearchParamDto searchParamDto,
+                                        Pageable pageable) {
+        return taskService.search(searchParamDto, pageable);
     }
 }

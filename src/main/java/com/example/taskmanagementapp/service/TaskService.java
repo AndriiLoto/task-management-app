@@ -2,6 +2,7 @@ package com.example.taskmanagementapp.service;
 
 import com.example.taskmanagementapp.dto.task.CreateTaskRequestDto;
 import com.example.taskmanagementapp.dto.task.TaskResponseDto;
+import com.example.taskmanagementapp.dto.task.TaskSearchParamDto;
 import com.example.taskmanagementapp.dto.task.UpdateTaskRequestDto;
 import com.example.taskmanagementapp.dto.task.UpdateTaskStatusDto;
 import com.example.taskmanagementapp.model.User;
@@ -26,4 +27,6 @@ public interface TaskService {
     TaskResponseDto addLabelToTask(Long taskId, User user, Long labelId);
 
     TaskResponseDto removeLabelFromTask(Long taskId, User user, Long labelId);
+
+    Page<TaskResponseDto> search(TaskSearchParamDto searchParamDto, Pageable pageable);
 }

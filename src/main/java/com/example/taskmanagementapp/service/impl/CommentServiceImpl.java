@@ -9,7 +9,7 @@ import com.example.taskmanagementapp.model.Comment;
 import com.example.taskmanagementapp.model.Task;
 import com.example.taskmanagementapp.model.User;
 import com.example.taskmanagementapp.repository.CommentRepository;
-import com.example.taskmanagementapp.repository.TaskRepository;
+import com.example.taskmanagementapp.repository.task.TaskRepository;
 import com.example.taskmanagementapp.service.CommentService;
 import com.example.taskmanagementapp.service.NotificationService;
 import java.time.LocalDateTime;

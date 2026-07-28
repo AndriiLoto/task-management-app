@@ -2,6 +2,7 @@ package com.example.taskmanagementapp.service.impl;
 
 import com.example.taskmanagementapp.dto.task.CreateTaskRequestDto;
 import com.example.taskmanagementapp.dto.task.TaskResponseDto;
+import com.example.taskmanagementapp.dto.task.TaskSearchParamDto;
 import com.example.taskmanagementapp.dto.task.UpdateTaskRequestDto;
 import com.example.taskmanagementapp.dto.task.UpdateTaskStatusDto;
 import com.example.taskmanagementapp.exception.CustomAccessException;
@@ -15,14 +16,16 @@ import com.example.taskmanagementapp.model.TaskStatus;
 import com.example.taskmanagementapp.model.User;
 import com.example.taskmanagementapp.repository.LabelRepository;
 import com.example.taskmanagementapp.repository.ProjectRepository;
-import com.example.taskmanagementapp.repository.TaskRepository;
 import com.example.taskmanagementapp.repository.UserRepository;
+import com.example.taskmanagementapp.repository.task.TaskRepository;
+import com.example.taskmanagementapp.repository.task.TaskSpecificationBuilder;
 import com.example.taskmanagementapp.service.NotificationService;
 import com.example.taskmanagementapp.service.TaskService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,6 +38,7 @@ public class TaskServiceImpl implements TaskService {
     private final TaskAccessService taskAccessService;
     private final LabelRepository labelRepository;
     private final NotificationService notificationService;
+    private final TaskSpecificationBuilder taskSpecificationBuilder;
 
     @Override
     public TaskResponseDto createTask(User user, CreateTaskRequestDto requestDto) {
@@ -153,6 +157,13 @@ public class TaskServiceImpl implements TaskService {
         task.getLabels().remove(label);
         taskRepository.save(task);
         return taskMapper.toTaskResponseDto(task);
+    }
+
+    @Override
+    public Page<TaskResponseDto> search(TaskSearchParamDto searchParamDto, Pageable pageable) {
+        Specification<Task> taskSpecification = taskSpecificationBuilder.build(searchParamDto);
+        return taskRepository.findAll(taskSpecification,pageable)
+                .map(taskMapper::toTaskResponseDto);
     }
 
     private Task getTaskObjectById(Long taskId) {
