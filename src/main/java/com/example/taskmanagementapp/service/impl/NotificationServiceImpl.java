@@ -54,4 +54,20 @@ public class NotificationServiceImpl implements NotificationService {
         );
         telegramService.sendMessage(assignee.getTelegramChatId(), message);
     }
+
+    @Override
+    public void notifyTaskReassigned(Task task) {
+        String message = """
+                You have been reassigned to this task! 📌
+                
+                Task: %s
+                Priority: %s
+                Due Date: %s
+                """.formatted(
+                        task.getName(),
+                task.getPriority().name(),
+                task.getDueDate()
+        );
+        telegramService.sendMessage(task.getAssignee().getTelegramChatId(), message);
+    }
 }

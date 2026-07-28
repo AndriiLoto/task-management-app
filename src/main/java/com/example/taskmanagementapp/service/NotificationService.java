@@ -7,4 +7,6 @@ public interface NotificationService {
     void notifyTaskAssigned(Task task);
 
     void notifyNewComment(Comment comment);
+
+    void notifyTaskReassigned(Task task);
 }

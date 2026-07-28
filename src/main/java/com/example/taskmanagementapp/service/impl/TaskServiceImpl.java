@@ -81,6 +81,9 @@ public class TaskServiceImpl implements TaskService {
         Task task = getTaskObjectById(taskId);
         taskMapper.updateTaskFromDto(requestDto,task);
         Task updatedTask = taskRepository.save(task);
+        if (updatedTask.getAssignee() != null && !updatedTask.getAssignee().getId().equals(user.getId())) {
+            notificationService.notifyTaskReassigned(updatedTask);
+        }
         return taskMapper.toTaskResponseDto(updatedTask);
     }
 
