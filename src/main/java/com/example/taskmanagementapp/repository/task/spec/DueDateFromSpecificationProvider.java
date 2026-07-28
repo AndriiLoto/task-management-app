@@ -1,0 +1,27 @@
+package com.example.taskmanagementapp.repository.task.spec;
+
+import com.example.taskmanagementapp.model.Task;
+import com.example.taskmanagementapp.repository.SpecificationProvider;
+import java.time.LocalDate;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
+
+@Component
+public class DueDateFromSpecificationProvider implements SpecificationProvider<Task> {
+    private static final String DUE_DATE_FROM = "dueDateFrom";
+    private static final String DUE_DATE = "dueDate";
+
+    @Override
+    public String getKey() {
+        return DUE_DATE_FROM;
+    }
+
+    @Override
+    public Specification<Task> getSpecification(String[] params) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.greaterThanOrEqualTo(
+                        root.get(DUE_DATE),
+                        LocalDate.parse(params[0]).atStartOfDay()
+                );
+    }
+}

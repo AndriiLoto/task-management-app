@@ -2,7 +2,7 @@ package com.example.taskmanagementapp.service.impl;
 
 import com.example.taskmanagementapp.model.Task;
 import com.example.taskmanagementapp.model.TaskStatus;
-import com.example.taskmanagementapp.repository.TaskRepository;
+import com.example.taskmanagementapp.repository.task.TaskRepository;
 import com.example.taskmanagementapp.service.NotificationService;
 import com.example.taskmanagementapp.service.TaskDeadlineSched;
 import java.time.LocalDateTime;

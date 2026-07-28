@@ -10,7 +10,7 @@ import com.example.taskmanagementapp.model.Attachment;
 import com.example.taskmanagementapp.model.Task;
 import com.example.taskmanagementapp.model.User;
 import com.example.taskmanagementapp.repository.AttachmentRepository;
-import com.example.taskmanagementapp.repository.TaskRepository;
+import com.example.taskmanagementapp.repository.task.TaskRepository;
 import com.example.taskmanagementapp.service.AttachmentService;
 import com.example.taskmanagementapp.service.DropboxService;
 import jakarta.transaction.Transactional;
