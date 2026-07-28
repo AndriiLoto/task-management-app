@@ -1,8 +1,11 @@
 package com.example.taskmanagementapp.service.impl;
 
+import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.files.FileMetadata;
+import com.example.taskmanagementapp.dto.attachment.AttachmentDownloadDto;
 import com.example.taskmanagementapp.dto.attachment.AttachmentResponseDto;
 import com.example.taskmanagementapp.exception.EntityNotFoundException;
+import com.example.taskmanagementapp.exception.FileStorageException;
 import com.example.taskmanagementapp.mapper.attachment.AttachmentMapper;
 import com.example.taskmanagementapp.model.Attachment;
 import com.example.taskmanagementapp.model.Task;
@@ -11,9 +14,8 @@ import com.example.taskmanagementapp.repository.AttachmentRepository;
 import com.example.taskmanagementapp.repository.TaskRepository;
 import com.example.taskmanagementapp.service.AttachmentService;
 import com.example.taskmanagementapp.service.DropboxService;
-import java.time.LocalDateTime;
-
 import jakarta.transaction.Transactional;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.data.domain.Page;
@@ -47,11 +49,29 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     @Override
-    public Page<AttachmentResponseDto> findAttachmentsByTaskId(User user, Long taskId, Pageable pageable) {
+    public Page<AttachmentResponseDto> findAttachmentsByTaskId(User user,
+                                                               Long taskId,
+                                                               Pageable pageable) {
         Task task = getTaskById(taskId);
         taskAccessService.checkAccess(user, task);
         return attachmentRepository.findAllByTaskId(taskId, pageable)
                 .map(attachmentMapper::toAttachmentResponseDto);
+    }
+
+    @Override
+    public AttachmentDownloadDto downloadAttachment(User user, Long attachmentId) {
+        Attachment attachment = attachmentRepository.findById(attachmentId).orElseThrow(
+                () -> new EntityNotFoundException("Attachment not found with id " + attachmentId)
+        );
+        Task task = getTaskById(attachment.getTask().getId());
+        taskAccessService.checkAccess(user,task);
+        byte[] content;
+        try {
+            content = dropboxService.downloadFile(attachment.getDropBoxFileId());
+        } catch (FileStorageException e) {
+            throw new FileStorageException("Failed to download attachment " + attachmentId, e);
+        }
+        return new AttachmentDownloadDto(content, attachment.getFileName());
     }
 
     private Task getTaskById(Long taskId) {

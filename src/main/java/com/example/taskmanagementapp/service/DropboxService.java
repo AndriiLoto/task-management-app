@@ -7,4 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 public interface DropboxService {
 
     FileMetadata uploadFile(MultipartFile file) throws FileUploadException;
+
+    byte[] downloadFile(String dropboxFileId);
+
+    void deleteFile(String dropboxFileId);
 }

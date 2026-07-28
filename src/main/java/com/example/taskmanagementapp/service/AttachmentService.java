@@ -1,5 +1,6 @@
 package com.example.taskmanagementapp.service;
 
+import com.example.taskmanagementapp.dto.attachment.AttachmentDownloadDto;
 import com.example.taskmanagementapp.dto.attachment.AttachmentResponseDto;
 import com.example.taskmanagementapp.model.User;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
@@ -13,4 +14,6 @@ public interface AttachmentService {
             throws FileUploadException;
 
     Page<AttachmentResponseDto> findAttachmentsByTaskId(User user, Long taskId, Pageable pageable);
+
+    AttachmentDownloadDto downloadAttachment(User user, Long attachmentId);
 }
