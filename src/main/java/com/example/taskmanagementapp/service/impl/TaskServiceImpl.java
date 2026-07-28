@@ -17,6 +17,7 @@ import com.example.taskmanagementapp.repository.LabelRepository;
 import com.example.taskmanagementapp.repository.ProjectRepository;
 import com.example.taskmanagementapp.repository.TaskRepository;
 import com.example.taskmanagementapp.repository.UserRepository;
+import com.example.taskmanagementapp.service.NotificationService;
 import com.example.taskmanagementapp.service.TaskService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,7 @@ public class TaskServiceImpl implements TaskService {
     private final TaskMapper taskMapper;
     private final TaskAccessService taskAccessService;
     private final LabelRepository labelRepository;
+    private final NotificationService notificationService;
 
     @Override
     public TaskResponseDto createTask(User user, CreateTaskRequestDto requestDto) {
@@ -48,6 +50,7 @@ public class TaskServiceImpl implements TaskService {
         }
         task.setStatus(TaskStatus.NOT_STARTED);
         taskRepository.save(task);
+        notificationService.notifyTaskAssigned(task);
         return taskMapper.toTaskResponseDto(task);
     }
 
