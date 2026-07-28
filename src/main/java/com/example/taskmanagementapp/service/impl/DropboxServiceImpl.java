@@ -3,8 +3,6 @@ package com.example.taskmanagementapp.service.impl;
 import com.dropbox.core.DbxDownloader;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
-import com.dropbox.core.v2.files.DeleteErrorException;
-import com.dropbox.core.v2.files.DeleteResult;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.example.taskmanagementapp.exception.FileStorageException;
 import com.example.taskmanagementapp.service.DropboxService;

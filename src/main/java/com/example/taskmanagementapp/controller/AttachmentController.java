@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,8 +52,10 @@ public class AttachmentController {
 
     @GetMapping("{id}/download")
     @Operation(summary = "Download attachment", description = "Downloads an attachment by id")
-    public ResponseEntity<byte[]> downloadAttachment(@AuthenticationPrincipal User user, @PathVariable Long id) {
-        AttachmentDownloadDto attachmentDownloadDto = attachmentService.downloadAttachment(user, id);
+    public ResponseEntity<byte[]> downloadAttachment(@AuthenticationPrincipal User user,
+                                                     @PathVariable Long id) {
+        AttachmentDownloadDto attachmentDownloadDto =
+                attachmentService.downloadAttachment(user, id);
         return ResponseEntity.ok()
                 .header(
                         HttpHeaders.CONTENT_DISPOSITION,
@@ -60,5 +63,13 @@ public class AttachmentController {
                 )
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(attachmentDownloadDto.content());
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete attachment", description = "Deletes an attachment by id")
+    public void deleteAttachmentById(@AuthenticationPrincipal User user,
+                                                   @PathVariable Long id) {
+        attachmentService.deleteAttachment(id, user);
     }
 }

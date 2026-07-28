@@ -1,6 +1,5 @@
 package com.example.taskmanagementapp.service.impl;
 
-import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.example.taskmanagementapp.dto.attachment.AttachmentDownloadDto;
 import com.example.taskmanagementapp.dto.attachment.AttachmentResponseDto;
@@ -72,6 +71,18 @@ public class AttachmentServiceImpl implements AttachmentService {
             throw new FileStorageException("Failed to download attachment " + attachmentId, e);
         }
         return new AttachmentDownloadDto(content, attachment.getFileName());
+    }
+
+    @Override
+    @Transactional
+    public void deleteAttachment(Long attachmentId, User user) {
+        Attachment attachment = attachmentRepository.findById(attachmentId).orElseThrow(
+                () -> new EntityNotFoundException("Attachment not found with id " + attachmentId)
+        );
+        Task task = getTaskById(attachment.getTask().getId());
+        taskAccessService.checkAccess(user,task);
+        dropboxService.deleteFile(attachment.getDropBoxFileId());
+        attachmentRepository.deleteById(attachmentId);
     }
 
     private Task getTaskById(Long taskId) {

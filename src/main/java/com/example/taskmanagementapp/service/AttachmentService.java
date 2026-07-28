@@ -16,4 +16,6 @@ public interface AttachmentService {
     Page<AttachmentResponseDto> findAttachmentsByTaskId(User user, Long taskId, Pageable pageable);
 
     AttachmentDownloadDto downloadAttachment(User user, Long attachmentId);
+
+    void deleteAttachment(Long attachmentId, User user);
 }
