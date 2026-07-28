@@ -1,5 +1,6 @@
 package com.example.taskmanagementapp.service.impl;
 
+import com.example.taskmanagementapp.model.Comment;
 import com.example.taskmanagementapp.model.Task;
 import com.example.taskmanagementapp.model.User;
 import com.example.taskmanagementapp.service.NotificationService;
@@ -30,6 +31,26 @@ public class NotificationServiceImpl implements NotificationService {
                         task.getName(),
                 task.getPriority().name(),
                 task.getDueDate()
+        );
+        telegramService.sendMessage(assignee.getTelegramChatId(), message);
+    }
+
+    @Override
+    public void notifyNewComment(Comment comment) {
+        User assignee = comment.getTask().getAssignee();
+        if (assignee.getTelegramChatId() == null) {
+            return;
+        }
+
+        String message = """ 
+                New comment on your task💬
+                Task: %s
+                From: %s
+                Comment: %s
+                """.formatted(
+                        comment.getTask().getName(),
+                comment.getUser().getUsername(),
+                comment.getText()
         );
         telegramService.sendMessage(assignee.getTelegramChatId(), message);
     }

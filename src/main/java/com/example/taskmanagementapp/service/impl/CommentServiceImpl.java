@@ -12,10 +12,13 @@ import com.example.taskmanagementapp.repository.CommentRepository;
 import com.example.taskmanagementapp.repository.TaskRepository;
 import com.example.taskmanagementapp.service.CommentService;
 import java.time.LocalDateTime;
+
+import com.example.taskmanagementapp.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -24,8 +27,10 @@ public class CommentServiceImpl implements CommentService {
     private final CommentMapper commentMapper;
     private final TaskRepository taskRepository;
     private final TaskAccessService taskAccessService;
+    private final NotificationService notificationService;
 
     @Override
+    @Transactional
     public CommentResponseDto createComment(User user, CreateCommentRequestDto requestDto) {
         Comment comment = commentMapper.toComment(requestDto);
         Task task = taskRepository.findById(requestDto.getTaskId()).orElseThrow(
@@ -37,6 +42,7 @@ public class CommentServiceImpl implements CommentService {
         comment.setUser(user);
         comment.setTimestamp(LocalDateTime.now());
         commentRepository.save(comment);
+        notificationService.notifyNewComment(comment);
         return commentMapper.toCommentResponseDto(comment);
     }
 
