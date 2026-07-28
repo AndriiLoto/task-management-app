@@ -2,6 +2,7 @@ package com.example.taskmanagementapp.service.impl;
 
 import com.example.taskmanagementapp.model.Comment;
 import com.example.taskmanagementapp.model.Task;
+import com.example.taskmanagementapp.model.TaskStatus;
 import com.example.taskmanagementapp.model.User;
 import com.example.taskmanagementapp.service.NotificationService;
 import com.example.taskmanagementapp.service.telegram.TelegramService;
@@ -69,5 +70,30 @@ public class NotificationServiceImpl implements NotificationService {
                 task.getDueDate()
         );
         telegramService.sendMessage(task.getAssignee().getTelegramChatId(), message);
+    }
+
+    @Override
+    public void notifyTaskStatusUpdate(Task task, TaskStatus oldStatus) {
+        User assignee = task.getAssignee();
+
+        if (assignee == null || assignee.getTelegramChatId() == null) {
+            return;
+        }
+
+        String message = """
+            Task status changed! 🔄
+
+            Task: %s
+            Status: %s → %s
+            """.formatted(
+                task.getName(),
+                oldStatus,
+                task.getStatus()
+        );
+
+        telegramService.sendMessage(
+                assignee.getTelegramChatId(),
+                message
+        );
     }
 }

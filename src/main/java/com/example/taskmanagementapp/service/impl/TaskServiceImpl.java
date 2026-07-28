@@ -88,6 +88,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional
     public TaskResponseDto updateTaskStatus(Long taskId,
                                             User user,
                                             UpdateTaskStatusDto requestDto) {
@@ -95,8 +96,23 @@ public class TaskServiceImpl implements TaskService {
         if (!task.getAssignee().getId().equals(user.getId())) {
             throw new CustomAccessException("User is not assignee of this task");
         }
-        task.setStatus(requestDto.getStatus());
-        return taskMapper.toTaskResponseDto(task);
+        TaskStatus oldStatus = task.getStatus();
+        TaskStatus newStatus = requestDto.getStatus();
+
+        if (oldStatus == newStatus) {
+            return taskMapper.toTaskResponseDto(task);
+        }
+
+        task.setStatus(newStatus);
+
+        Task updatedTask = taskRepository.save(task);
+
+        notificationService.notifyTaskStatusUpdate(
+                updatedTask,
+                oldStatus
+        );
+
+        return taskMapper.toTaskResponseDto(updatedTask);
     }
 
     @Override
