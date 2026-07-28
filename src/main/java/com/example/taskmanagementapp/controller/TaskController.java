@@ -82,9 +82,10 @@ public class TaskController {
     }
 
     @PutMapping("/{id}/status")
-    @Operation(summary = "Update task info", description = "Update task info by id")
+    @Operation(summary = "Update task status", description = "Update task status by id")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public TaskResponseDto updateTaskByID(@PathVariable Long id, @AuthenticationPrincipal User user,
+    public TaskResponseDto updateTaskStatus(@PathVariable Long id,
+                                            @AuthenticationPrincipal User user,
                                           @RequestBody @Valid UpdateTaskStatusDto requestDto) {
         return taskService.updateTaskStatus(id, user, requestDto);
     }

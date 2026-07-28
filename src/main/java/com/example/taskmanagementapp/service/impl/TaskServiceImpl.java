@@ -17,6 +17,7 @@ import com.example.taskmanagementapp.repository.LabelRepository;
 import com.example.taskmanagementapp.repository.ProjectRepository;
 import com.example.taskmanagementapp.repository.TaskRepository;
 import com.example.taskmanagementapp.repository.UserRepository;
+import com.example.taskmanagementapp.service.NotificationService;
 import com.example.taskmanagementapp.service.TaskService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,7 @@ public class TaskServiceImpl implements TaskService {
     private final TaskMapper taskMapper;
     private final TaskAccessService taskAccessService;
     private final LabelRepository labelRepository;
+    private final NotificationService notificationService;
 
     @Override
     public TaskResponseDto createTask(User user, CreateTaskRequestDto requestDto) {
@@ -48,6 +50,7 @@ public class TaskServiceImpl implements TaskService {
         }
         task.setStatus(TaskStatus.NOT_STARTED);
         taskRepository.save(task);
+        notificationService.notifyTaskAssigned(task);
         return taskMapper.toTaskResponseDto(task);
     }
 
@@ -78,10 +81,17 @@ public class TaskServiceImpl implements TaskService {
         Task task = getTaskObjectById(taskId);
         taskMapper.updateTaskFromDto(requestDto,task);
         Task updatedTask = taskRepository.save(task);
+        if (updatedTask.getAssignee() != null && !updatedTask
+                .getAssignee()
+                .getId()
+                .equals(user.getId())) {
+            notificationService.notifyTaskReassigned(updatedTask);
+        }
         return taskMapper.toTaskResponseDto(updatedTask);
     }
 
     @Override
+    @Transactional
     public TaskResponseDto updateTaskStatus(Long taskId,
                                             User user,
                                             UpdateTaskStatusDto requestDto) {
@@ -89,8 +99,23 @@ public class TaskServiceImpl implements TaskService {
         if (!task.getAssignee().getId().equals(user.getId())) {
             throw new CustomAccessException("User is not assignee of this task");
         }
-        task.setStatus(requestDto.getStatus());
-        return taskMapper.toTaskResponseDto(task);
+        TaskStatus oldStatus = task.getStatus();
+        TaskStatus newStatus = requestDto.getStatus();
+
+        if (oldStatus == newStatus) {
+            return taskMapper.toTaskResponseDto(task);
+        }
+
+        task.setStatus(newStatus);
+
+        Task updatedTask = taskRepository.save(task);
+
+        notificationService.notifyTaskStatusUpdate(
+                updatedTask,
+                oldStatus
+        );
+
+        return taskMapper.toTaskResponseDto(updatedTask);
     }
 
     @Override
