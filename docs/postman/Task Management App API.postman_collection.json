@@ -1,0 +1,2990 @@
+{
+  "info": {
+    "_postman_id": "7b3e086a-ea20-4125-9932-dbd6c12b8634",
+    "name": "Task Management App API",
+    "description": "## Task Management App API\n\nThis is a comprehensive, well-structured collection for a full-featured task management application. All requests are organized under an `api` root folder and use a `{{baseUrl}}` variable with Bearer token authentication (`{{bearerToken}}`). The collection covers the following functional areas:\n\n- **Auth** — User registration and login.\n- **Users** — Retrieve and update the current user's profile, update a user's role, and generate a Telegram link token for notifications.\n- **Projects** — Create, list, retrieve, update, and delete projects.\n- **Tasks** — Create tasks, list all tasks for a project, retrieve tasks assigned to the current user, update task details, and delete tasks.\n- **Comments** — Add comments to a task, retrieve all comments for a task, and delete a comment.\n- **Labels** — Create, list, update, and delete labels for organizing tasks.\n- **Attachments** — Upload file attachments to a task, list all attachments for a task, download an attachment, and delete an attachment.\n\nThis collection includes response examples for all endpoints and supports pagination (`page`, `size`, `sort`) on list endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56219992",
+    "_collection_link": "https://go.postman.co/collection/56219992-7b3e086a-ea20-4125-9932-dbd6c12b8634?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "users",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "role",
+                  "item": [
+                    {
+                      "name": "Update user role",
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"role\": \"ADMIN\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users/:id/role",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users",
+                            ":id",
+                            "role"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        },
+                        "description": "Updates the role of a user with the specified ID"
+                      },
+                      "response": [
+                        {
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "*/*"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"role\": \"ADMIN\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/users/:id/role",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "users",
+                                ":id",
+                                "role"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id",
+                                  "value": "7434"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "*/*"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"id\": 8063,\n  \"username\": \"string\",\n  \"email\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"roles\": [\n    \"string\"\n  ]\n}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "me",
+              "item": [
+                {
+                  "name": "telegram-link",
+                  "item": [
+                    {
+                      "name": "create Telegram Link Token",
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users/me/telegram-link",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users",
+                            "me",
+                            "telegram-link"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "*/*"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/users/me/telegram-link",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "users",
+                                "me",
+                                "telegram-link"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "*/*"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "string"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Get current user",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/users/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "users",
+                        "me"
+                      ]
+                    },
+                    "description": "Returns information about the currently authenticated user"
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users/me",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users",
+                            "me"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"id\": 8063,\n  \"username\": \"string\",\n  \"email\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"roles\": [\n    \"string\"\n  ]\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "Update user info",
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"username\": \"string\",\n  \"email\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/users/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "users",
+                        "me"
+                      ]
+                    },
+                    "description": "Updates information about the currently authenticated user"
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"username\": \"string\",\n  \"email\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users/me",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users",
+                            "me"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"id\": 8063,\n  \"username\": \"string\",\n  \"email\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"roles\": [\n    \"string\"\n  ]\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "tasks",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "status",
+                  "item": [
+                    {
+                      "name": "Update task status",
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"NOT_STARTED\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasks/:id/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasks",
+                            ":id",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        },
+                        "description": "Update task status by id"
+                      },
+                      "response": [
+                        {
+                          "name": "Accepted",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "*/*"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"NOT_STARTED\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/tasks/:id/status",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "tasks",
+                                ":id",
+                                "status"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id",
+                                  "value": "7434"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "*/*"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"id\": 4124,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"priority\": \"HIGH\",\n  \"status\": \"COMPLETED\",\n  \"dueDate\": \"1999-07-09T18:29:37.883Z\",\n  \"projectId\": 6384,\n  \"assigneeId\": 6273,\n  \"labels\": [\n    {\n      \"id\": 1352,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    },\n    {\n      \"id\": 4718,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    }\n  ]\n}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Get task by id",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tasks/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tasks",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "7434"
+                        }
+                      ]
+                    },
+                    "description": "Get task by id for authenticated user"
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasks/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasks",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"id\": 4124,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"priority\": \"HIGH\",\n  \"status\": \"COMPLETED\",\n  \"dueDate\": \"1999-07-09T18:29:37.883Z\",\n  \"projectId\": 6384,\n  \"assigneeId\": 6273,\n  \"labels\": [\n    {\n      \"id\": 1352,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    },\n    {\n      \"id\": 4718,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    }\n  ]\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "Update task info",
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"priority\": \"LOW\",\n  \"status\": \"IN_PROGRESS\",\n  \"dueDate\": \"2022-09-14T10:44:46.533Z\",\n  \"assigneeId\": 1773\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tasks/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tasks",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "7434"
+                        }
+                      ]
+                    },
+                    "description": "Update task info by id"
+                  },
+                  "response": [
+                    {
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"priority\": \"LOW\",\n  \"status\": \"IN_PROGRESS\",\n  \"dueDate\": \"2022-09-14T10:44:46.533Z\",\n  \"assigneeId\": 1773\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasks/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasks",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"id\": 4124,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"priority\": \"HIGH\",\n  \"status\": \"COMPLETED\",\n  \"dueDate\": \"1999-07-09T18:29:37.883Z\",\n  \"projectId\": 6384,\n  \"assigneeId\": 6273,\n  \"labels\": [\n    {\n      \"id\": 1352,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    },\n    {\n      \"id\": 4718,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    }\n  ]\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "{taskId}",
+              "item": [
+                {
+                  "name": "labels",
+                  "item": [
+                    {
+                      "name": "{labelId}",
+                      "item": [
+                        {
+                          "name": "Add label to task",
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "*/*"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/tasks/:taskId/labels/:labelId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "tasks",
+                                ":taskId",
+                                "labels",
+                                ":labelId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "taskId",
+                                  "value": "7434"
+                                },
+                                {
+                                  "key": "labelId",
+                                  "value": "7434"
+                                }
+                              ]
+                            },
+                            "description": "Add label to task by id"
+                          },
+                          "response": [
+                            {
+                              "name": "Accepted",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "*/*"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/tasks/:taskId/labels/:labelId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "tasks",
+                                    ":taskId",
+                                    "labels",
+                                    ":labelId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "taskId",
+                                      "value": "7434"
+                                    },
+                                    {
+                                      "key": "labelId",
+                                      "value": "7434"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Accepted",
+                              "code": 202,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "*/*"
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"id\": 4124,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"priority\": \"HIGH\",\n  \"status\": \"COMPLETED\",\n  \"dueDate\": \"1999-07-09T18:29:37.883Z\",\n  \"projectId\": 6384,\n  \"assigneeId\": 6273,\n  \"labels\": [\n    {\n      \"id\": 1352,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    },\n    {\n      \"id\": 4718,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    }\n  ]\n}"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Delete label from task",
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "*/*"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/tasks/:taskId/labels/:labelId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "tasks",
+                                ":taskId",
+                                "labels",
+                                ":labelId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "taskId",
+                                  "value": "7434"
+                                },
+                                {
+                                  "key": "labelId",
+                                  "value": "7434"
+                                }
+                              ]
+                            },
+                            "description": "Delete label from task by id"
+                          },
+                          "response": [
+                            {
+                              "name": "Accepted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "*/*"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/tasks/:taskId/labels/:labelId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "tasks",
+                                    ":taskId",
+                                    "labels",
+                                    ":labelId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "taskId",
+                                      "value": "7434"
+                                    },
+                                    {
+                                      "key": "labelId",
+                                      "value": "7434"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Accepted",
+                              "code": 202,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "*/*"
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"id\": 4124,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"priority\": \"HIGH\",\n  \"status\": \"COMPLETED\",\n  \"dueDate\": \"1999-07-09T18:29:37.883Z\",\n  \"projectId\": 6384,\n  \"assigneeId\": 6273,\n  \"labels\": [\n    {\n      \"id\": 1352,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    },\n    {\n      \"id\": 4718,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    }\n  ]\n}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "delete",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tasks/:taskId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tasks",
+                        ":taskId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "taskId",
+                          "value": "7434"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "No Content",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasks/:taskId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasks",
+                            ":taskId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "taskId",
+                              "value": "7434"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "search",
+              "item": [
+                {
+                  "name": "Search tasks",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tasks/search?status=NOT_STARTED&priority=MEDIUM&assigneeId=7434&projectId=7434&dueDateFrom=2024-10-02&dueDateTo=2024-10-02&name=string&page=8041&size=4423&sort=string,string",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tasks",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "key": "status",
+                          "value": "NOT_STARTED"
+                        },
+                        {
+                          "key": "priority",
+                          "value": "MEDIUM"
+                        },
+                        {
+                          "key": "assigneeId",
+                          "value": "7434"
+                        },
+                        {
+                          "key": "projectId",
+                          "value": "7434"
+                        },
+                        {
+                          "key": "dueDateFrom",
+                          "value": "2024-10-02"
+                        },
+                        {
+                          "key": "dueDateTo",
+                          "value": "2024-10-02"
+                        },
+                        {
+                          "key": "name",
+                          "value": "string"
+                        },
+                        {
+                          "key": "page",
+                          "value": "8041"
+                        },
+                        {
+                          "key": "size",
+                          "value": "4423"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "string,string"
+                        }
+                      ]
+                    },
+                    "description": "Search tasks using specified parameters"
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasks/search?status=NOT_STARTED&priority=MEDIUM&assigneeId=7434&projectId=7434&dueDateFrom=2024-10-02&dueDateTo=2024-10-02&name=string&page=8041&size=4423&sort=string,string",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasks",
+                            "search"
+                          ],
+                          "query": [
+                            {
+                              "key": "status",
+                              "value": "NOT_STARTED"
+                            },
+                            {
+                              "key": "priority",
+                              "value": "MEDIUM"
+                            },
+                            {
+                              "key": "assigneeId",
+                              "value": "7434"
+                            },
+                            {
+                              "key": "projectId",
+                              "value": "7434"
+                            },
+                            {
+                              "key": "dueDateFrom",
+                              "value": "2024-10-02"
+                            },
+                            {
+                              "key": "dueDateTo",
+                              "value": "2024-10-02"
+                            },
+                            {
+                              "key": "name",
+                              "value": "string"
+                            },
+                            {
+                              "key": "page",
+                              "value": "8041"
+                            },
+                            {
+                              "key": "size",
+                              "value": "4423"
+                            },
+                            {
+                              "key": "sort",
+                              "value": "string,string"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"totalElements\": 6407,\n  \"totalPages\": 8244,\n  \"pageable\": {\n    \"unpaged\": false,\n    \"paged\": true,\n    \"pageNumber\": 1057,\n    \"pageSize\": 1333,\n    \"offset\": 2712,\n    \"sort\": {\n      \"unsorted\": false,\n      \"sorted\": true,\n      \"empty\": false\n    }\n  },\n  \"numberOfElements\": 6875,\n  \"size\": 3606,\n  \"content\": [\n    {\n      \"id\": 4571,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priority\": \"HIGH\",\n      \"status\": \"COMPLETED\",\n      \"dueDate\": \"1954-01-29T12:07:45.108Z\",\n      \"projectId\": 1437,\n      \"assigneeId\": 1099,\n      \"labels\": [\n        {\n          \"id\": 8022,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        },\n        {\n          \"id\": 3974,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 1125,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priority\": \"HIGH\",\n      \"status\": \"IN_PROGRESS\",\n      \"dueDate\": \"2025-06-06T23:46:32.498Z\",\n      \"projectId\": 6027,\n      \"assigneeId\": 6660,\n      \"labels\": [\n        {\n          \"id\": 4329,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        },\n        {\n          \"id\": 6940,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"number\": 3640,\n  \"sort\": {\n    \"unsorted\": true,\n    \"sorted\": true,\n    \"empty\": false\n  },\n  \"first\": true,\n  \"last\": true,\n  \"empty\": true\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "me",
+              "item": [
+                {
+                  "name": "Get all tasks by assignee id",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tasks/me?page=8041&size=4423&sort=string,string",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tasks",
+                        "me"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "8041"
+                        },
+                        {
+                          "key": "size",
+                          "value": "4423"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "string,string"
+                        }
+                      ]
+                    },
+                    "description": "Get all tasks by project id for authenticated user"
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasks/me?page=8041&size=4423&sort=string,string",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasks",
+                            "me"
+                          ],
+                          "query": [
+                            {
+                              "key": "page",
+                              "value": "8041"
+                            },
+                            {
+                              "key": "size",
+                              "value": "4423"
+                            },
+                            {
+                              "key": "sort",
+                              "value": "string,string"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"totalElements\": 6407,\n  \"totalPages\": 8244,\n  \"pageable\": {\n    \"unpaged\": false,\n    \"paged\": true,\n    \"pageNumber\": 1057,\n    \"pageSize\": 1333,\n    \"offset\": 2712,\n    \"sort\": {\n      \"unsorted\": false,\n      \"sorted\": true,\n      \"empty\": false\n    }\n  },\n  \"numberOfElements\": 6875,\n  \"size\": 3606,\n  \"content\": [\n    {\n      \"id\": 4571,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priority\": \"HIGH\",\n      \"status\": \"COMPLETED\",\n      \"dueDate\": \"1954-01-29T12:07:45.108Z\",\n      \"projectId\": 1437,\n      \"assigneeId\": 1099,\n      \"labels\": [\n        {\n          \"id\": 8022,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        },\n        {\n          \"id\": 3974,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 1125,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priority\": \"HIGH\",\n      \"status\": \"IN_PROGRESS\",\n      \"dueDate\": \"2025-06-06T23:46:32.498Z\",\n      \"projectId\": 6027,\n      \"assigneeId\": 6660,\n      \"labels\": [\n        {\n          \"id\": 4329,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        },\n        {\n          \"id\": 6940,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"number\": 3640,\n  \"sort\": {\n    \"unsorted\": true,\n    \"sorted\": true,\n    \"empty\": false\n  },\n  \"first\": true,\n  \"last\": true,\n  \"empty\": true\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Get all tasks by project id",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/tasks?projectId=7434&page=8041&size=4423&sort=string,string",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tasks"
+                  ],
+                  "query": [
+                    {
+                      "key": "projectId",
+                      "value": "7434"
+                    },
+                    {
+                      "key": "page",
+                      "value": "8041"
+                    },
+                    {
+                      "key": "size",
+                      "value": "4423"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "string,string"
+                    }
+                  ]
+                },
+                "description": "Get all tasks by project id for authenticated user"
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tasks?projectId=7434&page=8041&size=4423&sort=string,string",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tasks"
+                      ],
+                      "query": [
+                        {
+                          "key": "projectId",
+                          "value": "7434"
+                        },
+                        {
+                          "key": "page",
+                          "value": "8041"
+                        },
+                        {
+                          "key": "size",
+                          "value": "4423"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "string,string"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"totalElements\": 6407,\n  \"totalPages\": 8244,\n  \"pageable\": {\n    \"unpaged\": false,\n    \"paged\": true,\n    \"pageNumber\": 1057,\n    \"pageSize\": 1333,\n    \"offset\": 2712,\n    \"sort\": {\n      \"unsorted\": false,\n      \"sorted\": true,\n      \"empty\": false\n    }\n  },\n  \"numberOfElements\": 6875,\n  \"size\": 3606,\n  \"content\": [\n    {\n      \"id\": 4571,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priority\": \"HIGH\",\n      \"status\": \"COMPLETED\",\n      \"dueDate\": \"1954-01-29T12:07:45.108Z\",\n      \"projectId\": 1437,\n      \"assigneeId\": 1099,\n      \"labels\": [\n        {\n          \"id\": 8022,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        },\n        {\n          \"id\": 3974,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 1125,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"priority\": \"HIGH\",\n      \"status\": \"IN_PROGRESS\",\n      \"dueDate\": \"2025-06-06T23:46:32.498Z\",\n      \"projectId\": 6027,\n      \"assigneeId\": 6660,\n      \"labels\": [\n        {\n          \"id\": 4329,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        },\n        {\n          \"id\": 6940,\n          \"name\": \"string\",\n          \"color\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"number\": 3640,\n  \"sort\": {\n    \"unsorted\": true,\n    \"sorted\": true,\n    \"empty\": false\n  },\n  \"first\": true,\n  \"last\": true,\n  \"empty\": true\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create Task",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"string\",\n  \"dueDate\": \"2016-05-31T21:00:58.380Z\",\n  \"name\": \"string\",\n  \"priority\": \"HIGH\",\n  \"projectId\": 4150,\n  \"assigneeId\": 4545\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/tasks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tasks"
+                  ]
+                },
+                "description": "Create a new task by the authenticated user"
+              },
+              "response": [
+                {
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"string\",\n  \"dueDate\": \"2016-05-31T21:00:58.380Z\",\n  \"name\": \"string\",\n  \"priority\": \"HIGH\",\n  \"projectId\": 4150,\n  \"assigneeId\": 4545\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tasks",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tasks"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"id\": 4124,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"priority\": \"HIGH\",\n  \"status\": \"COMPLETED\",\n  \"dueDate\": \"1999-07-09T18:29:37.883Z\",\n  \"projectId\": 6384,\n  \"assigneeId\": 6273,\n  \"labels\": [\n    {\n      \"id\": 1352,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    },\n    {\n      \"id\": 4718,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    }\n  ]\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Get project by Id",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "7434"
+                        }
+                      ]
+                    },
+                    "description": "Get project by Id for current user"
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"id\": 1532,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"startDate\": \"1959-05-18T12:15:50.743Z\",\n  \"endDate\": \"1981-07-26T10:53:24.584Z\",\n  \"status\": \"INITIATED\",\n  \"ownerId\": 2921\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "Update project by id",
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"startDate\": \"2025-12-07\",\n  \"endDate\": \"1994-01-22\",\n  \"status\": \"IN_PROGRESS\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "7434"
+                        }
+                      ]
+                    },
+                    "description": "Update project by id for current user"
+                  },
+                  "response": [
+                    {
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"startDate\": \"2025-12-07\",\n  \"endDate\": \"1994-01-22\",\n  \"status\": \"IN_PROGRESS\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"id\": 1532,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"startDate\": \"1959-05-18T12:15:50.743Z\",\n  \"endDate\": \"1981-07-26T10:53:24.584Z\",\n  \"status\": \"INITIATED\",\n  \"ownerId\": 2921\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "Delete project by id",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "7434"
+                        }
+                      ]
+                    },
+                    "description": "Delete project by id for current user"
+                  },
+                  "response": [
+                    {
+                      "name": "No Content",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Get all projects",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/projects?page=8041&size=4423&sort=string,string",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "projects"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "8041"
+                    },
+                    {
+                      "key": "size",
+                      "value": "4423"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "string,string"
+                    }
+                  ]
+                },
+                "description": "Get all projects for the authenticated user"
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects?page=8041&size=4423&sort=string,string",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "8041"
+                        },
+                        {
+                          "key": "size",
+                          "value": "4423"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "string,string"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"totalElements\": 8705,\n  \"totalPages\": 4151,\n  \"pageable\": {\n    \"unpaged\": false,\n    \"paged\": false,\n    \"pageNumber\": 7299,\n    \"pageSize\": 1351,\n    \"offset\": 7332,\n    \"sort\": {\n      \"unsorted\": true,\n      \"sorted\": false,\n      \"empty\": false\n    }\n  },\n  \"numberOfElements\": 8797,\n  \"size\": 9221,\n  \"content\": [\n    {\n      \"id\": 9993,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"startDate\": \"1996-11-14T17:08:18.787Z\",\n      \"endDate\": \"2001-04-29T17:47:13.432Z\",\n      \"status\": \"INITIATED\",\n      \"ownerId\": 5219\n    },\n    {\n      \"id\": 6351,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"startDate\": \"2003-03-08T09:08:11.698Z\",\n      \"endDate\": \"1992-08-31T05:27:39.032Z\",\n      \"status\": \"IN_PROGRESS\",\n      \"ownerId\": 5006\n    }\n  ],\n  \"number\": 4965,\n  \"sort\": {\n    \"unsorted\": false,\n    \"sorted\": false,\n    \"empty\": false\n  },\n  \"first\": true,\n  \"last\": true,\n  \"empty\": true\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create new project",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"string\",\n  \"endDate\": \"1974-11-22T00:16:27.507Z\",\n  \"name\": \"string\",\n  \"startDate\": \"1968-08-06T20:32:39.322Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/projects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "projects"
+                  ]
+                },
+                "description": "Creates a new project for the authenticated user"
+              },
+              "response": [
+                {
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"string\",\n  \"endDate\": \"1974-11-22T00:16:27.507Z\",\n  \"name\": \"string\",\n  \"startDate\": \"1968-08-06T20:32:39.322Z\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"id\": 1532,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"startDate\": \"1959-05-18T12:15:50.743Z\",\n  \"endDate\": \"1981-07-26T10:53:24.584Z\",\n  \"status\": \"INITIATED\",\n  \"ownerId\": 2921\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "labels",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Update Label",
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"string\",\n  \"color\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/labels/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "labels",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "7434"
+                        }
+                      ]
+                    },
+                    "description": "Update Label by id"
+                  },
+                  "response": [
+                    {
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"string\",\n  \"color\": \"string\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/labels/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "labels",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"id\": 7854,\n  \"name\": \"string\",\n  \"color\": \"string\"\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "Delete Label",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/labels/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "labels",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "7434"
+                        }
+                      ]
+                    },
+                    "description": "Delete Label by id"
+                  },
+                  "response": [
+                    {
+                      "name": "No Content",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/labels/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "labels",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Get all labels",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/labels?page=8041&size=4423&sort=string,string",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "labels"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "8041"
+                    },
+                    {
+                      "key": "size",
+                      "value": "4423"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "string,string"
+                    }
+                  ]
+                },
+                "description": "Get all labels for the authenticated user"
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/labels?page=8041&size=4423&sort=string,string",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "labels"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "8041"
+                        },
+                        {
+                          "key": "size",
+                          "value": "4423"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "string,string"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"totalElements\": 6181,\n  \"totalPages\": 1292,\n  \"pageable\": {\n    \"unpaged\": false,\n    \"paged\": true,\n    \"pageNumber\": 9346,\n    \"pageSize\": 9812,\n    \"offset\": 8354,\n    \"sort\": {\n      \"unsorted\": true,\n      \"sorted\": true,\n      \"empty\": true\n    }\n  },\n  \"numberOfElements\": 9703,\n  \"size\": 762,\n  \"content\": [\n    {\n      \"id\": 6724,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    },\n    {\n      \"id\": 9887,\n      \"name\": \"string\",\n      \"color\": \"string\"\n    }\n  ],\n  \"number\": 665,\n  \"sort\": {\n    \"unsorted\": false,\n    \"sorted\": true,\n    \"empty\": false\n  },\n  \"first\": false,\n  \"last\": true,\n  \"empty\": false\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create new label",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"color\": \"s\",\n  \"name\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/labels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "labels"
+                  ]
+                },
+                "description": "Creates a new label for the authenticated user"
+              },
+              "response": [
+                {
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"color\": \"s\",\n  \"name\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/labels",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "labels"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"id\": 7854,\n  \"name\": \"string\",\n  \"color\": \"string\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "comments",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Delete comment",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/comments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "comments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "7434"
+                        }
+                      ]
+                    },
+                    "description": "Delete comment by id"
+                  },
+                  "response": [
+                    {
+                      "name": "No Content",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/comments/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "comments",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Get comments for task",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/comments?taskId=7434&page=8041&size=4423&sort=string,string",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "comments"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskId",
+                      "value": "7434"
+                    },
+                    {
+                      "key": "page",
+                      "value": "8041"
+                    },
+                    {
+                      "key": "size",
+                      "value": "4423"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "string,string"
+                    }
+                  ]
+                },
+                "description": "Get comments for task by id"
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/comments?taskId=7434&page=8041&size=4423&sort=string,string",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "comments"
+                      ],
+                      "query": [
+                        {
+                          "key": "taskId",
+                          "value": "7434"
+                        },
+                        {
+                          "key": "page",
+                          "value": "8041"
+                        },
+                        {
+                          "key": "size",
+                          "value": "4423"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "string,string"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"totalElements\": 5413,\n  \"totalPages\": 6232,\n  \"pageable\": {\n    \"unpaged\": true,\n    \"paged\": false,\n    \"pageNumber\": 5246,\n    \"pageSize\": 549,\n    \"offset\": 3473,\n    \"sort\": {\n      \"unsorted\": true,\n      \"sorted\": true,\n      \"empty\": true\n    }\n  },\n  \"numberOfElements\": 3488,\n  \"size\": 268,\n  \"content\": [\n    {\n      \"id\": 7394,\n      \"taskId\": 175,\n      \"userId\": 1577,\n      \"text\": \"string\",\n      \"timestamp\": \"1997-12-20T12:49:43.344Z\"\n    },\n    {\n      \"id\": 5021,\n      \"taskId\": 546,\n      \"userId\": 6512,\n      \"text\": \"string\",\n      \"timestamp\": \"1959-04-25T23:40:07.812Z\"\n    }\n  ],\n  \"number\": 8049,\n  \"sort\": {\n    \"unsorted\": true,\n    \"sorted\": true,\n    \"empty\": true\n  },\n  \"first\": false,\n  \"last\": true,\n  \"empty\": true\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create new comment",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"taskId\": 8780,\n  \"text\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/comments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "comments"
+                  ]
+                },
+                "description": "Creates a new comment for a task"
+              },
+              "response": [
+                {
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"taskId\": 8780,\n  \"text\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/comments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "comments"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"id\": 2426,\n  \"taskId\": 5010,\n  \"userId\": 3057,\n  \"text\": \"string\",\n  \"timestamp\": \"2006-02-12T17:23:46.235Z\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "auth",
+          "item": [
+            {
+              "name": "register",
+              "item": [
+                {
+                  "name": "Register a new user",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"6SGbDpoNAMuDXJ@TRhjXuWVYIyjGS.espd\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"password\": \"stringstring\",\n  \"repeatPassword\": \"string\",\n  \"username\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/register",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "register"
+                      ]
+                    },
+                    "description": "Registers a new user with the provided username, password, and email"
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"6SGbDpoNAMuDXJ@TRhjXuWVYIyjGS.espd\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"password\": \"stringstring\",\n  \"repeatPassword\": \"string\",\n  \"username\": \"string\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/register",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "register"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"id\": 8063,\n  \"username\": \"string\",\n  \"email\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"roles\": [\n    \"string\"\n  ]\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "login",
+              "item": [
+                {
+                  "name": "Login user",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"password\": \"string\",\n  \"username\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/login",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "login"
+                      ]
+                    },
+                    "description": "Logs in user to the system"
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"password\": \"string\",\n  \"username\": \"string\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/login",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "login"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "*/*"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"token\": \"string\"\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "attachments",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "download",
+                  "item": [
+                    {
+                      "name": "Download attachment",
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "*/*"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/attachments/:id/download",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "attachments",
+                            ":id",
+                            "download"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        },
+                        "description": "Downloads an attachment by id"
+                      },
+                      "response": [
+                        {
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "*/*"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/attachments/:id/download",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "attachments",
+                                ":id",
+                                "download"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id",
+                                  "value": "7434"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "*/*"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "string"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Delete attachment",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/attachments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "attachments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "7434"
+                        }
+                      ]
+                    },
+                    "description": "Deletes an attachment by id"
+                  },
+                  "response": [
+                    {
+                      "name": "No Content",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/attachments/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "attachments",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7434"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Get all attachments by task id",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/attachments?taskId=7434&page=8041&size=4423&sort=string,string",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "attachments"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskId",
+                      "value": "7434"
+                    },
+                    {
+                      "key": "page",
+                      "value": "8041"
+                    },
+                    {
+                      "key": "size",
+                      "value": "4423"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "string,string"
+                    }
+                  ]
+                },
+                "description": "Get all attachments by task id"
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/attachments?taskId=7434&page=8041&size=4423&sort=string,string",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "attachments"
+                      ],
+                      "query": [
+                        {
+                          "key": "taskId",
+                          "value": "7434"
+                        },
+                        {
+                          "key": "page",
+                          "value": "8041"
+                        },
+                        {
+                          "key": "size",
+                          "value": "4423"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "string,string"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"totalElements\": 8057,\n  \"totalPages\": 5490,\n  \"pageable\": {\n    \"unpaged\": true,\n    \"paged\": true,\n    \"pageNumber\": 903,\n    \"pageSize\": 3962,\n    \"offset\": 6485,\n    \"sort\": {\n      \"unsorted\": false,\n      \"sorted\": false,\n      \"empty\": false\n    }\n  },\n  \"numberOfElements\": 3644,\n  \"size\": 1062,\n  \"content\": [\n    {\n      \"id\": 2584,\n      \"taskId\": 7600,\n      \"fileName\": \"string\",\n      \"uploadDate\": \"2017-01-10T19:22:12.289Z\"\n    },\n    {\n      \"id\": 2601,\n      \"taskId\": 4270,\n      \"fileName\": \"string\",\n      \"uploadDate\": \"1956-01-20T15:44:33.062Z\"\n    }\n  ],\n  \"number\": 1289,\n  \"sort\": {\n    \"unsorted\": true,\n    \"sorted\": true,\n    \"empty\": false\n  },\n  \"first\": false,\n  \"last\": true,\n  \"empty\": false\n}"
+                }
+              ]
+            },
+            {
+              "name": "Upload attachment",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/attachments?taskId=7434&file=string",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "attachments"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskId",
+                      "value": "7434"
+                    },
+                    {
+                      "key": "file",
+                      "value": "string"
+                    }
+                  ]
+                },
+                "description": "Uploads an attachment to a task"
+              },
+              "response": [
+                {
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "*/*"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/attachments?taskId=7434&file=string",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "attachments"
+                      ],
+                      "query": [
+                        {
+                          "key": "taskId",
+                          "value": "7434"
+                        },
+                        {
+                          "key": "file",
+                          "value": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "*/*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"id\": 1437,\n  \"taskId\": 1757,\n  \"fileName\": \"string\",\n  \"uploadDate\": \"1975-02-28T12:19:09.121Z\"\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081"
+    }
+  ]
+}
