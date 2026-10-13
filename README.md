@@ -15,18 +15,7 @@
 
 Task Management App is an educational pet project developed with Spring Boot to demonstrate a modern RESTful backend for project and task collaboration. The application supports user registration and JWT authentication, role-based project and task administration, task assignment, status updates, labels, comments, file attachments through Dropbox, and Telegram notifications for task activity. It was created to gain hands-on experience with Spring Boot, Spring Security, JPA/Hibernate, Liquibase, Docker, Testcontainers, external API integration, and production-style layered backend architecture.
 
-## 🖼️ Visuals
-
-### 🗄️ Database Diagram
-![Database diagram](docs/images/database-diagram.png)
-
-### 🔄 API Flow / Screenshots
-
-#### Swagger UI
-![Swagger UI](docs/images/swagger.png)
-
-#### Postman Collection
-![Postman Collection](docs/images/postman-collection.png)
+The application is deployed to AWS, and the API documentation is available in Swagger UI: [Swagger UI](http://ec2-13-62-126-56.eu-north-1.compute.amazonaws.com/swagger-ui/index.html#/)
 
 ## 🛠️ Technologies
 
@@ -49,6 +38,19 @@ Task Management App is an educational pet project developed with Spring Boot to 
 - Dropbox SDK
 - Telegram Bot API integration
 - Checkstyle
+
+## 🖼️ Visuals
+
+### 🗄️ Database Diagram
+![Database diagram](docs/images/database-diagram.png)
+
+### 🔄 API Flow / Screenshots
+
+#### Swagger UI
+![Swagger UI](docs/images/swagger.png)
+
+#### Postman Collection
+![Postman Collection](docs/images/postman-collection.png)
 
 ## ✨ Features
 
